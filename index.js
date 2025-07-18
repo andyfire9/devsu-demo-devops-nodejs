@@ -1,9 +1,12 @@
 import sequelize from './shared/database/database.js'
 import { usersRouter } from "./users/router.js"
 import express from 'express'
+import cors from 'cors' 
 
 const app = express()
 const PORT = 8000
+
+app.use(cors());
 
 sequelize.sync({ force: true }).then(() => console.log('db is ready'))
 
