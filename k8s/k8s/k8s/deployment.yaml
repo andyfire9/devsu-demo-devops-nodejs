@@ -24,7 +24,7 @@ spec:
         fsGroup: 1001
       containers:
       - name: nodejs-app
-        image: ghcr.io/yourusername/devsu-devops-exercise:IMAGE_TAG
+        image: ghcr.io/andyfire9/devsu-devops-exercise:IMAGE_TAG
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
