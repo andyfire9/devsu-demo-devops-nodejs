@@ -7,12 +7,12 @@ data:
   NODE_ENV: "production"
   PORT: "8000"
   LOG_LEVEL: "info"
-  # Database configuration
+  # Configuración de base de datos
   DB_TYPE: "sqlite"
   DB_NAME: "production.sqlite"
-  # Application configuration
+  # Configuración de la aplicación
   APP_NAME: "Devsu DevOps Node.js Demo"
   API_PREFIX: "/api"
-  # Health check configuration
+  # Configuración de health check
   HEALTH_CHECK_INTERVAL: "30000"
   HEALTH_CHECK_TIMEOUT: "3000"

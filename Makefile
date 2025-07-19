@@ -1,6 +1,6 @@
 .PHONY: help build run test deploy clean
 
-help: ## Show this help message
+help: ## Help message
 	@echo 'Usage: make [target]'
 	@echo ''
 	@echo 'Targets:'
@@ -21,16 +21,16 @@ test-integration: ## Run integration tests
 lint: ## Run linting
 	npx eslint . --ext .js,.jsx || echo "No lint configuration"
 
-deploy-local: ## Deploy to local Kubernetes
+deploy-local: ## Deploy a Kubernetes
 	kubectl apply -f k8s/
 
 undeploy-local: ## Remove from local Kubernetes
 	kubectl delete -f k8s/
 
-logs: ## Show application logs
+logs: ## Logs de la aplicación
 	kubectl logs -n devops-exercise -l app=nodejs-app -f
 
-port-forward: ## Port forward to access the app
+port-forward: ## Port forward
 	kubectl port-forward -n devops-exercise svc/nodejs-app-service 8000:80
 
 clean: ## Clean up Docker images

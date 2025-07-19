@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "main" {
   location = var.location
 }
 
-# Virtual Network
+# Maquina virtual
 resource "azurerm_virtual_network" "main" {
   name                = "vnet-devops-exercise"
   address_space       = ["10.0.0.0/16"]
@@ -34,7 +34,7 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = azurerm_resource_group.main.name
 }
 
-# Subnet for AKS
+# Subnet para AKS
 resource "azurerm_subnet" "aks" {
   name                 = "subnet-aks"
   resource_group_name  = azurerm_resource_group.main.name
@@ -80,7 +80,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 }
 
-# Log Analytics Workspace
+# Log A. Workspace
 resource "azurerm_log_analytics_workspace" "main" {
   name                = "log-devops-exercise"
   location            = azurerm_resource_group.main.location
@@ -98,7 +98,7 @@ resource "azurerm_container_registry" "main" {
   admin_enabled       = true
 }
 
-# Role Assignment for AKS to pull images from ACR
+# Role Assignment para aks
 resource "azurerm_role_assignment" "aks_acr" {
   principal_id                     = azurerm_kubernetes_cluster.main.kubelet_identity[0].object_id
   role_definition_name             = "AcrPull"
