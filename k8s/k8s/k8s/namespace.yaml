@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: devops-exercise - Andres
-  labels:
-    name: devops-exercise - Andres
-    environment: production
