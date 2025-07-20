@@ -141,7 +141,7 @@ jobs:
         sarif_file: 'trivy-results.sarif'
       if: always()
 
-  #  Deploy to Kubernetes
+  #  Deploy to Kubernetes (Local-Only: Dry Run)
   deploy:
     runs-on: ubuntu-latest
     needs: [docker-build, security-scan]
@@ -162,7 +162,8 @@ jobs:
 
     - name: Apply Kubernetes manifests (Dry Run)
       run: |
-      
+        echo "NOTE: Skipping actual kubectl apply because the cluster is local-only."
+        echo "Run these commands manually to deploy locally:"
         echo "kubectl apply -f k8s/namespace.yaml --validate=false"
         echo "kubectl apply -f k8s/configmap.yaml --validate=false"
         echo "kubectl apply -f k8s/secret.yaml --validate=false"
@@ -171,12 +172,13 @@ jobs:
         echo "kubectl apply -f k8s/hpa.yaml --validate=false"
         echo "kubectl apply -f k8s/ingress.yaml --validate=false"
 
-
-    - name: Wait for deployment
+    - name: Wait for deployment (Dry Run)
       run: |
-        kubectl -n devops-exercise rollout status deployment/nodejs-app
+        echo "NOTE: Skipping kubectl rollout status because the cluster is local-only."
+        echo "Run this locally to check rollout:"
+        echo "kubectl -n devops-exercise rollout status deployment/nodejs-app"
 
-    - name: Run smoke tests
+    - name: Run smoke tests (placeholder)
       run: |
-        echo "Running smoke tests..."
-        # Add actual smoke test commands here
+        echo "Running smoke tests placeholder..."
+        echo "Add your smoke test commands here if you run them locally."
