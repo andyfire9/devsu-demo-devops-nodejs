@@ -1,47 +1,47 @@
-﻿# Multi-stage build for smaller image size
+﻿# Construcción multi-etapa para reducir el tamaño de la imagen
 FROM node:18.15.0-alpine AS builder
 
-# Set working directory
+# Directorio de trabajo
 WORKDIR /app
 
-# Copy package files
+# Copiar archivos de dependencias
 COPY package*.json ./
 
-# Install dependencies
+# Instalar dependencias
 RUN npm ci --only=production
 
-# Production stage
+# Etapa de producción
 FROM node:18.15.0-alpine
 
-# Install dumb-init for proper signal handling
+# Instalar dumb-init para manejar señales
 RUN apk add --no-cache dumb-init
 
-# Create non-root user
+# Crear usuario no root
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
 
-# Set working directory
+# Directorio de trabajo
 WORKDIR /app
 
-# Copy package files and installed dependencies
+# Copiar dependencias instaladas y archivos de la app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --chown=nodejs:nodejs . .
 
-# Set environment variables
+# Variables de entorno
 ENV NODE_ENV=production
 ENV PORT=8000
 
-# Expose port
+# Exponer puerto
 EXPOSE 8000
 
-# Switch to non-root user
+# Usar usuario no root
 USER nodejs
 
-# Health check
+# Healthcheck de la app
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD node healthcheck.js || exit 1
 
-# Use dumb-init to handle signals properly
+# Usar dumb-init para manejar señales
 ENTRYPOINT ["dumb-init", "--"]
 
-# Start the application
+# Iniciar la aplicación
 CMD ["node", "index.js"]

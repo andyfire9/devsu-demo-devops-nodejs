@@ -12,6 +12,11 @@ User.init({
             type: DataTypes.STRING,
             unique: true,
             allowNull: false
+        },
+        active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     },
     {
