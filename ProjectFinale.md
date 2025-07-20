@@ -3,7 +3,7 @@
 ## 📊 Deliverables Summary
 
 ### 1. GitHub Repository
-- **URL**: https://github.com/YOUR_USERNAME/devsu-devops-exercise
+- **URL**: https://github.com/andyfire9/devsu-devops-exercise
 - **Visibility**: Public
 - **Branch**: main
 
@@ -41,13 +41,7 @@
 
 ## 🔍 Evidence of Execution
 
-### GitHub Actions Pipeline
-![Pipeline Success](docs/images/pipeline-success.png)
-- All stages passing
-- Docker image built and pushed
-- Security scan completed
-
-### Local Kubernetes Deployment
+Deployment
 ```bash
 $ kubectl get all -n devops-exercise
 NAME                             READY   STATUS    RESTARTS   AGE
