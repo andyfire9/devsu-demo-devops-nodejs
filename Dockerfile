@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿# Construcción multi-etapa para reducir el tamaño de la imagen
+=======
+﻿# Build multi-etapa para imagen más pequeña
+>>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
 FROM node:18.15.0-alpine AS builder
 
 # Directorio de trabajo
@@ -16,13 +20,21 @@ FROM node:18.15.0-alpine
 # Instalar dumb-init para manejar señales
 RUN apk add --no-cache dumb-init
 
+<<<<<<< HEAD
 # Crear usuario no root
+=======
+# Crear usuario sin privilegios
+>>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
 RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
 
 # Directorio de trabajo
 WORKDIR /app
 
+<<<<<<< HEAD
 # Copiar dependencias instaladas y archivos de la app
+=======
+# Copiar dependencias instaladas
+>>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
 COPY --from=builder /app/node_modules ./node_modules
 COPY --chown=nodejs:nodejs . .
 
@@ -33,10 +45,17 @@ ENV PORT=8000
 # Exponer puerto
 EXPOSE 8000
 
+<<<<<<< HEAD
 # Usar usuario no root
 USER nodejs
 
 # Healthcheck de la app
+=======
+# Usar usuario sin privilegios
+USER nodejs
+
+# Comprobación de salud
+>>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD node healthcheck.js || exit 1
 

@@ -1,15 +1,26 @@
 import sequelize from './shared/database/database.js'
 import { usersRouter } from "./users/router.js"
 import express from 'express'
+<<<<<<< HEAD
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerSpec from './swagger/config.js'
+=======
+import cors from 'cors' 
+>>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
 
 const app = express()
 const PORT = 8000
 
+<<<<<<< HEAD
 // Middleware
 app.use(cors())
+=======
+app.use(cors());
+
+sequelize.sync({ force: true }).then(() => console.log('db is ready'))
+
+>>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
 app.use(express.json())
 
 // Documentación Swagger

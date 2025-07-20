@@ -1,65 +1,65 @@
 #!/bin/bash
 
-# Test deployment script
+# Script de prueba de despliegue
 set -e
 
-echo "🧪 Testing Node.js Application Deployment"
+echo "🧪 Probando el despliegue de la aplicación Node.js"
 echo "========================================"
 
-# Colors for output
+# Colores para la salida
 GREEN='\033[0;32m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m' 
 
-# Function to check if command exists
+# Función para verificar si un comando existe
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Check prerequisites
-echo "📋 Checking prerequisites..."
+# Verificar prerequisitos
+echo "📋 Verificando prerequisitos..."
 for cmd in docker kubectl node npm; do
     if command_exists "$cmd"; then
-        echo -e "${GREEN}✓${NC} $cmd is installed"
+        echo -e "${GREEN}✓${NC} $cmd está instalado"
     else
-        echo -e "${RED}✗${NC} $cmd is not installed"
+        echo -e "${RED}✗${NC} $cmd no está instalado"
         exit 1
     fi
 done
 
-# Test Docker build
-echo -e "\n🐳 Testing Docker build..."
+# Probar build de Docker
+echo -e "\n🐳 Probando build de Docker..."
 if docker build -t devsu-test:latest .; then
-    echo -e "${GREEN}✓${NC} Docker build successful"
+    echo -e "${GREEN}✓${NC} Build de Docker exitoso"
 else
-    echo -e "${RED}✗${NC} Docker build failed"
+    echo -e "${RED}✗${NC} Falló el build de Docker"
     exit 1
 fi
 
-# Test Node.js app
-echo -e "\n📦 Testing Node.js application..."
+# Probar aplicación Node.js
+echo -e "\n📦 Probando aplicación Node.js..."
 if npm test; then
-    echo -e "${GREEN}✓${NC} Tests passed"
+    echo -e "${GREEN}✓${NC} Pruebas exitosas"
 else
-    echo -e "${RED}✗${NC} Tests failed"
+    echo -e "${RED}✗${NC} Fallaron las pruebas"
 fi
 
-# Check Kubernetes connection
-echo -e "\n☸️  Testing Kubernetes connection..."
+# Verificar conexión a Kubernetes
+echo -e "\n☸️  Probando conexión a Kubernetes..."
 if kubectl cluster-info; then
-    echo -e "${GREEN}✓${NC} Kubernetes cluster is accessible"
+    echo -e "${GREEN}✓${NC} El clúster de Kubernetes es accesible"
 else
-    echo -e "${RED}✗${NC} Cannot connect to Kubernetes cluster"
+    echo -e "${RED}✗${NC} No se puede conectar al clúster de Kubernetes"
 fi
 
-# Validate Kubernetes manifests
-echo -e "\n📝 Validating Kubernetes manifests..."
+# Validar manifiestos de Kubernetes
+echo -e "\n📝 Validando manifiestos de Kubernetes..."
 for file in k8s/*.yaml; do
     if kubectl apply --dry-run=client -f "$file" >/dev/null 2>&1; then
-        echo -e "${GREEN}✓${NC} $file is valid"
+        echo -e "${GREEN}✓${NC} $file es válido"
     else
-        echo -e "${RED}✗${NC} $file has errors"
+        echo -e "${RED}✗${NC} $file tiene errores"
     fi
 done
 
-echo -e "\n✅ Todo bien."
+echo -e "\n Despliegue de prueba completado"
