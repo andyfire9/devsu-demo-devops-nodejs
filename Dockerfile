@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿# Construcción multi-etapa para reducir el tamaño de la imagen
-=======
-﻿# Build multi-etapa para imagen más pequeña
->>>>>>> 292c882108427fb10cabda6133b35d08bcfb1bb6
+﻿# Dockerfile para una aplicación Node.js
 FROM node:18.15.0-alpine AS builder
 
 # Directorio de trabajo
