@@ -160,15 +160,17 @@ jobs:
       run: |
         sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/*.yaml
 
-    - name: Apply Kubernetes manifests
+    - name: Apply Kubernetes manifests (Dry Run)
       run: |
-        kubectl apply -f k8s/namespace.yaml --validate=false
-        kubectl apply -f k8s/configmap.yaml --validate=false
-        kubectl apply -f k8s/secret.yaml --validate=false
-        kubectl apply -f k8s/deployment.yaml --validate=false
-        kubectl apply -f k8s/service.yaml --validate=false
-        kubectl apply -f k8s/hpa.yaml --validate=false
-        kubectl apply -f k8s/ingress.yaml --validate=false
+      
+        echo "kubectl apply -f k8s/namespace.yaml --validate=false"
+        echo "kubectl apply -f k8s/configmap.yaml --validate=false"
+        echo "kubectl apply -f k8s/secret.yaml --validate=false"
+        echo "kubectl apply -f k8s/deployment.yaml --validate=false"
+        echo "kubectl apply -f k8s/service.yaml --validate=false"
+        echo "kubectl apply -f k8s/hpa.yaml --validate=false"
+        echo "kubectl apply -f k8s/ingress.yaml --validate=false"
+
 
     - name: Wait for deployment
       run: |
