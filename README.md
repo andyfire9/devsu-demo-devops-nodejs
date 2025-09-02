@@ -1,26 +1,3 @@
-# Demo Devops NodeJs
-
-This is a simple application to be used in the technical test of DevOps.
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18.15.0
-
-### Installation
-
-Clone this repo.
-
-```bash
-git clone https://bitbucket.org/devsu/demo-devops-nodejs.git
-```
-
-Install dependencies.
-
-```bash
-npm i
-```
 
 ### Database
 
@@ -136,8 +113,3 @@ If the response is unsuccessful, we will receive status 400 and the following me
     ]
 }
 ```
-
-## License
-
-Copyright © 2023 Devsu. All rights reserved.
-..
